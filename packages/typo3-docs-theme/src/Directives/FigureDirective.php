@@ -90,7 +90,6 @@ final class FigureDirective extends BaseDirective
             'target' => $scalarOptions['target'] ?? null,
             'class' => $scalarOptions['class'] ?? null,
             'name' => $scalarOptions['name'] ?? null,
-            'align' => $scalarOptions['align'] ?? null,
         ]);
 
         $figureNode = new FigureNode($image, new CollectionNode($collectionNode->getChildren()));
@@ -116,7 +115,6 @@ final class FigureDirective extends BaseDirective
             $filteredOptions['target'],
             $filteredOptions['class'],
             $filteredOptions['name'],
-            $filteredOptions['align'],
         );
 
         if (!empty($filteredOptions)) {

@@ -1,5 +1,14 @@
+{%- set alignClass = '' -%}
+{%- if node.hasOption('align') -%}
+    {%- if node.option('align') == 'left' -%}{%- set alignClass = 'float-left' -%}
+    {%- elseif node.option('align') == 'right' -%}{%- set alignClass = 'float-right' -%}
+    {%- elseif node.option('align') == 'center' -%}{%- set alignClass = 'align-center' -%}
+    {%- endif -%}
+{%- endif -%}
+{%- set classes = node.classesString -%}
+{%- if alignClass -%}{%- set classes = (classes ? classes ~ ' ' : '') ~ alignClass -%}{%- endif -%}
 <figure
-    {%- if node.classesString %} class="{{ node.classesString }}"{% endif -%}
+    {%- if classes %} class="{{ classes }}"{% endif -%}
     {%- if node.hasOption('figwidth') %} style="{% if node.hasOption('figwidth') %}width: {{ node.option('figwidth') }};{% endif %}"{% endif -%}
     {%- if node.hasOption('zoom') %} data-zoom="{{ node.option('zoom') }}"{% endif -%}
     {%- if node.hasOption('gallery') %} data-gallery="{{ node.option('gallery') }}"{% endif -%}
