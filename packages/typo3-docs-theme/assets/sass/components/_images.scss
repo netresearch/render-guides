@@ -17,17 +17,18 @@ figure {
     &:not(:first-child) {
         @extend .mt-3;
     }
+    &.float-left,
+    &.float-right {
+        margin-bottom: $spacer;
+        max-width: 50%;
+    }
     &.float-left {
         float: left;
         margin-right: $spacer;
-        margin-bottom: $spacer;
-        max-width: 50%;
     }
     &.float-right {
         float: right;
         margin-left: $spacer;
-        margin-bottom: $spacer;
-        max-width: 50%;
     }
     &.align-center {
         margin-left: auto;

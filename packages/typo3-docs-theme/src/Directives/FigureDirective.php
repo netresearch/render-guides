@@ -25,6 +25,9 @@ use phpDocumentor\Guides\RestructuredText\Parser\Productions\Rule;
 
 use function dirname;
 use function in_array;
+use function is_string;
+use function preg_replace;
+use function trim;
 
 /**
  * Renders a figure with optional zoom functionality.
@@ -82,13 +85,22 @@ final class FigureDirective extends BaseDirective
             dirname($blockContext->getDocumentParserContext()->getContext()->getCurrentAbsolutePath()),
             $directive->getData(),
         ));
+        // Strip float classes from the inner image - floating should only
+        // apply to the <figure> element to keep the caption below the image
+        $imageClass = isset($scalarOptions['class']) && is_string($scalarOptions['class'])
+            ? $scalarOptions['class']
+            : null;
+        if ($imageClass !== null) {
+            $imageClass = trim((string) preg_replace('/\bfloat-(left|right)\b/', '', $imageClass)) ?: null;
+        }
+
         $image = $image->withOptions([
             'width' => $scalarOptions['width'] ?? null,
             'height' => $scalarOptions['height'] ?? null,
             'alt' => $scalarOptions['alt'] ?? null,
             'scale' => $scalarOptions['scale'] ?? null,
             'target' => $scalarOptions['target'] ?? null,
-            'class' => $scalarOptions['class'] ?? null,
+            'class' => $imageClass,
             'name' => $scalarOptions['name'] ?? null,
         ]);
 

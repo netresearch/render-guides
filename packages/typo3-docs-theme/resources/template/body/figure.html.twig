@@ -1,12 +1,6 @@
-{%- set alignClass = '' -%}
-{%- if node.hasOption('align') -%}
-    {%- if node.option('align') == 'left' -%}{%- set alignClass = 'float-left' -%}
-    {%- elseif node.option('align') == 'right' -%}{%- set alignClass = 'float-right' -%}
-    {%- elseif node.option('align') == 'center' -%}{%- set alignClass = 'align-center' -%}
-    {%- endif -%}
-{%- endif -%}
-{%- set classes = node.classesString -%}
-{%- if alignClass -%}{%- set classes = (classes ? classes ~ ' ' : '') ~ alignClass -%}{%- endif -%}
+{%- set alignMap = {'left': 'float-left', 'right': 'float-right', 'center': 'align-center'} -%}
+{%- set alignClass = node.hasOption('align') ? alignMap[node.option('align')]|default('') : '' -%}
+{%- set classes = ([node.classesString, alignClass]|join(' '))|trim -%}
 <figure
     {%- if classes %} class="{{ classes }}"{% endif -%}
     {%- if node.hasOption('figwidth') %} style="{% if node.hasOption('figwidth') %}width: {{ node.option('figwidth') }};{% endif %}"{% endif -%}
