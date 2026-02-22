@@ -255,7 +255,12 @@ final class ConfigureCommand extends Command
             $output->writeln(print_r($input->getOptions(), true));
         }
 
-        $config = (string) $input->getArgument('input') . '/guides.xml';
+        $inputPath = $input->getArgument('input');
+        if (!is_string($inputPath)) {
+            $output->writeln('<error>Input argument must be a string path</error>');
+            return Command::FAILURE;
+        }
+        $config = $inputPath . '/guides.xml';
 
         if ($output->isVeryVerbose()) {
             $output->writeln(sprintf('Config: <info>%s</info>', $config));

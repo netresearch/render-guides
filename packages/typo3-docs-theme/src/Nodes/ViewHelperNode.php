@@ -131,7 +131,7 @@ final class ViewHelperNode extends GeneralDirectiveNode implements LinkTargetNod
     }
 
     /**
-     * @param ViewHelperArgumentNode[] $arguments
+     * @param array<string, ViewHelperArgumentNode> $arguments
      */
     public function setArguments(array $arguments): void
     {

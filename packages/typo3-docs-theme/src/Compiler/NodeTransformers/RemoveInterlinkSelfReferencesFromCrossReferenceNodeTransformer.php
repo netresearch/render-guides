@@ -35,8 +35,7 @@ final class RemoveInterlinkSelfReferencesFromCrossReferenceNodeTransformer imple
         return $node;
     }
 
-    /** @phpstan-ignore return.unusedType */
-    public function leaveNode(Node $node, CompilerContextInterface $compilerContext): Node|null
+    public function leaveNode(Node $node, CompilerContextInterface $compilerContext): Node
     {
         assert($node instanceof CrossReferenceNode);
         if (!$this->themeSettings->hasSettings('interlink_shortcode')) {

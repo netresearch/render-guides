@@ -249,7 +249,10 @@ final class RunDecorator extends Command
     {
         $localInputDirectives = [];
         foreach ($baseInputDirectives as $baseInputDirectiveKey => $baseInputDirectiveValue) {
-            $localInputDirectives[$baseInputDirectiveKey] = (string) $baseInputDirectiveValue . DIRECTORY_SEPARATOR . $availableLocalization;
+            if (!is_scalar($baseInputDirectiveValue)) {
+                continue;
+            }
+            $localInputDirectives[$baseInputDirectiveKey] = $baseInputDirectiveValue . DIRECTORY_SEPARATOR . $availableLocalization;
         }
         $output->writeln(sprintf('<info>Trying to render %s ...</info>', $availableLocalization));
 
